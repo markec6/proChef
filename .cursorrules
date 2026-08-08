@@ -1,0 +1,95 @@
+# MASTER ARCHITECTURE & CONTEXT SPECIFICATION: proChef ERP/Inventory Management
+
+## 1. PROJECT OVERVIEW & GOALS
+You are assisting in building a highly optimized, modern, and modern-looking web application for "proChef" (https://www.prochef.rs/), a high-scale catering company operating across 3 physical locations:
+1. Dobanovci (Main Hub / Central Warehouse)
+2. Geneks
+3. Zvezdara
+
+The company prepares daily meals for major hospital clinical centers (Prva Hirurška, Hematologija, Alergologija, Klinički Centar) across Breakfast, Lunch, and Dinner shifts. They also handle custom private catering events and manage ~20 special diet patients ("Specijalci") daily, whose menus change frequently.
+
+### Core Problems Being Solved:
+1. **Outdated Legacy UI/UX**: Replacing an ugly, 30-year-old table-heavy ERP software that users hate using.
+2. **Stock Discrepancies**: The real stock in cold rooms/storage never matched the legacy app.
+3. **Bad Filtering**: Searching for items like "Kiseli krastavac" currently returns 50+ messy, unformatted Excel-like rows without clear categorization or barcodes.
+4. **Extreme Ease of Use**: The UI must be so clean, intuitive, legible, and simple that any worker on any shift can update stock levels or view menus in seconds without training.
+
+---
+
+## 2. TECH STACK & SYSTEM ARCHITECTURE
+- **Framework**: Next.js 14+ (App Router, React Server Components where applicable, Client Components for interactivity)
+- **Language**: TypeScript (Strict typing for all DB models and UI components)
+- **Styling**: Tailwind CSS (Clean, high-contrast, professional palette with Slate/Navy and Emerald/Orange accents)
+- **UI Components**: shadcn/ui (Radix UI primitives)
+- **Database & Auth**: Supabase (PostgreSQL with RLS, Supabase Auth)
+- **Icons**: Lucide React
+- **Table Engine**: TanStack Table v8 (`@tanstack/react-table`)
+
+---
+
+## 3. STRICT FOLDER & FILE STRUCTURE
+Maintain a clean, highly scalable directory structure:
+
+src/
+├── app/                  # Next.js App Router routes
+│   ├── (auth)/           # Authentication routes (login, register)
+│   ├── (dashboard)/      # Protected dashboard routes
+│   │   ├── utrosak/      # Inventory / Stock tracking page
+│   │   ├── jelovnici/    # Bi-weekly menus & hospital shifts
+│   │   ├── specijalci/   # Special diet patient management
+│   │   ├── fakture/      # Invoicing module
+│   │   └── page.tsx      # Main Dashboard overview
+│   ├── api/              # API routes (Webhooks, barcode scans, etc.)
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Landing / Redirection page
+├── components/           # Reusable UI components
+│   ├── ui/               # Atomic shadcn/ui components (button, card, input...)
+│   ├── layout/           # Sidebar, Header, LocationSwitcher, UserMenu
+│   ├── modules/          # Feature-specific components
+│   │   ├── utrosak/      # Stock Table, Barcode Modal, Quick Subtract Form
+│   │   ├── jelovnici/    # Shift view, Week 1 / Week 2 selector
+│   │   └── specijalci/   # Special patients list and notes
+│   └── shared/           # Common badges, status indicators, search bars
+├── lib/                  # Utilities, Supabase clients, helper functions
+│   ├── supabase/         # client.ts, server.ts, middleware.ts
+│   ├── utils.ts          # cn() helper, currency formatters, date helpers
+│   └── constants.ts      # Enums, static options (locations, categories)
+├── types/                # TypeScript interface definitions
+│   ├── database.types.ts # Auto-generated / custom Supabase DB types
+│   └── index.ts          # UI specific types
+
+---
+
+## 4. CORE FEATURES & BUSINESS LOGIC
+
+### A. Multi-Location Stock & Inventory (`utrosak`)
+- Items exist in a global catalog (`products`), but stock levels (`inventory`) are isolated per location (`Dobanovci`, `Geneks`, `Zvezdara`).
+- Every product has a `min_stock` threshold per location.
+- Visual Badges in UI:
+  - **In Stock (Green)**: Current > Min Stock + 15%
+  - **Low Stock (Yellow/Amber)**: Current <= Min Stock + 15%
+  - **Critical (Red + Alert Icon)**: Current <= Min Stock
+- Search & Filtering: Must support fuzzy multi-keyword search (Name + Brand + Barcode) and category filtering to eliminate duplicate/confusing rows.
+- Stock Log: Every stock reduction records `user_id`, `location_id`, `amount_used`, `timestamp`, and `notes`.
+
+### B. Shift & Diets Management (`jelovnici` & `specijalci`)
+- Supports alternating **Week 1 / Week 2** rotating hospital menus.
+- Split by daily shifts (Breakfast, Lunch, Dinner) and specific hospital wards.
+- Specijalci module allows rapid updating of individual special patient dietary requirements (~20 active entries).
+
+---
+
+## 5. UI/UX & DESIGN PRINCIPLES
+- **Sidebar Navigation**: Dark/Slate collapsible sidebar with explicit module icons.
+- **Header Context**: Global **Location Switcher** dropdown in the header so workers always know which warehouse/facility they are currently interacting with.
+- **Tables**: Clean borders, zebra/hover rows, explicit badges for statuses, quick inline action buttons (`+` / `-` stock subtraction modal).
+- **Zero Ambiguity**: Large text for numbers/units (KG, L, Pack), high visibility status colors.
+
+---
+
+## 6. STRICT INSTRUCTIONS FOR CURSOR EXECUTION (CRITICAL)
+1. **MEMORY CONTEXT ONLY**: This document is purely for project memory, domain understanding, and architecture context. Do NOT auto-generate files, do NOT execute commands, and do NOT write initial code upon reading this file.
+2. **STRICT STEP-BY-STEP WORKFLOW**: Wait for explicit user prompts for each micro-task (Celina / Korak). Work ONLY on the explicitly requested task, one file or module at a time.
+3. **NO PREMATURE CODE GENERATION**: Do not create placeholder files, extra routes, or boilerplate components until instructed.
+4. **COMPREHENSIVE EXPLANATIONS**: When executing a task, first explain the logic and structure of what is being built, ensuring the approach is modular and robust.
+5. **ZERO TODOs IN CODE**: All generated code must be production-ready, fully typed TypeScript with complete imports and zero placeholder stubs (`// TODO`, `...rest of code`).
