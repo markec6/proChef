@@ -1,26 +1,648 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.gpu-scroll {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  overscroll-behavior: contain;
+}
+
+.gpu-sheet {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout;
+}
+
+.gpu-sticky {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  isolation: isolate;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 10mm 15mm;
+}
+
+@media print {
+  .gpu-scroll,
+  .gpu-sheet,
+  .gpu-sticky {
+    transform: none !important;
+    contain: none !important;
+    backface-visibility: visible !important;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+  }
+
+  body:has([data-obrasci-workspace]) {
+    background: white !important;
+  }
+
+  body:has([data-obrasci-workspace]) * {
+    visibility: hidden !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet],
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] * {
+    visibility: visible !important;
+  }
+
+  body:has([data-obrasci-workspace]) aside,
+  body:has([data-obrasci-workspace]) header,
+  body:has([data-obrasci-workspace]) [data-obrasci-controls],
+  body:has([data-obrasci-workspace]) [data-obrasci-row-controls] {
+    display: none !important;
+  }
+
+  body:has([data-obrasci-workspace]) .flex.min-h-screen,
+  body:has([data-obrasci-workspace]) .flex.min-w-0.flex-1.flex-col {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  body:has([data-obrasci-workspace]) main {
+    display: block !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-workspace] {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: black !important;
+    print-color-adjust: exact;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] > div {
+    margin-top: 8px !important;
+    padding-bottom: 8px !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet-header] {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    gap: 10px !important;
+    padding-bottom: 8px !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-metadata] {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    gap: 8px !important;
+    padding: 4px 0 8px !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    > div {
+    margin-top: 4px !important;
+    padding-bottom: 6px !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    [data-obrasci-sheet-header] {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+    gap: 8px !important;
+    padding-bottom: 6px !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    [data-obrasci-metadata] {
+    margin-top: 4px !important;
+    margin-bottom: 6px !important;
+    gap: 6px !important;
+    padding: 2px 0 6px !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    h2 {
+    font-size: 18px !important;
+    margin-top: 0 !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] h2 {
+    margin-top: 2px !important;
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] p,
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] span,
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] label {
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] table {
+    width: 100% !important;
+    max-width: none !important;
+    table-layout: fixed !important;
+    font-size: 15px !important;
+    line-height: 1.15 !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] thead {
+    display: table-header-group !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] tfoot {
+    display: table-row-group !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] th,
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] td {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 2px 6px !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    vertical-align: middle !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] tr {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-index-col] {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 44px !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    text-align: center !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-nowrap="true"] {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    table {
+    width: 100% !important;
+    max-width: none !important;
+    table-layout: fixed !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    th,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    td {
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    th {
+    font-size: 11px !important;
+    padding: 8px 10px !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    table
+    input,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    table
+    textarea,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-pages="1"]
+    table
+    div {
+    min-height: auto !important;
+    padding: 2px 4px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-break-after="true"] {
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-print-break-before="true"] {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  body:has([data-obrasci-workspace]) input,
+  body:has([data-obrasci-workspace]) textarea {
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] table input,
+  body:has([data-obrasci-workspace]) [data-obrasci-sheet] table textarea {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    padding: 2px 4px !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  body:has([data-obrasci-workspace]) textarea {
+    overflow: visible !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    table {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    th,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    td {
+    padding: 1px 4px !important;
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    th {
+    font-weight: 500 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    tbody
+    td {
+    font-weight: 400 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    tbody
+    td:first-child {
+    font-weight: 700 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    table
+    input,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    table
+    textarea,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="menus-normatives"]
+    table
+    div {
+    padding: 1px 3px !important;
+    font-size: 9px !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    table {
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    th,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    td {
+    padding: 1px 4px !important;
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    th {
+    font-weight: 600 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    tbody
+    td {
+    font-weight: 400 !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    table
+    input,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    table
+    textarea,
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    table
+    div {
+    padding: 1px 3px !important;
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    [data-obrasci-sheet-header] {
+    margin-bottom: 8px !important;
+    gap: 8px !important;
+    padding-bottom: 6px !important;
+  }
+
+  body:has([data-obrasci-workspace])
+    [data-obrasci-template="special-regimes"]
+    [data-obrasci-metadata] {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    gap: 6px !important;
+    padding: 4px 3px 6px !important;
+  }
+
+  body:has([data-obrasci-workspace]) [data-obrasci-section-row] td {
+    background: rgb(229 231 235) !important;
+    padding: 1px 3px !important;
+    text-align: center !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+  }
+
+  body:has([data-invoice-print]) {
+    background: white !important;
+  }
+
+  body:has([data-invoice-print]) * {
+    visibility: hidden !important;
+  }
+
+  body:has([data-invoice-print]) [data-invoice-sheet],
+  body:has([data-invoice-print]) [data-invoice-sheet] * {
+    visibility: visible !important;
+  }
+
+  body:has([data-invoice-print]) aside,
+  body:has([data-invoice-print]) header {
+    display: none !important;
+  }
+
+  body:has([data-invoice-print]) .flex.min-h-screen,
+  body:has([data-invoice-print]) .flex.min-w-0.flex-1.flex-col {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  body:has([data-invoice-print]) main {
+    display: block !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has([data-invoice-print]) [data-invoice-print] {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has([data-invoice-print]) [data-invoice-sheet] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: black !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body:has([data-invoice-print]) [data-invoice-sheet] table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  body:has([data-invoice-print]) [data-invoice-sheet] tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
 }
