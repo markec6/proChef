@@ -2,8 +2,6 @@ import type { LucideIcon } from "lucide-react";
 import {
   Activity,
   ClipboardList,
-  FileSpreadsheet,
-  History,
   LayoutDashboard,
   PackageSearch,
   Receipt,
@@ -51,20 +49,21 @@ export const DASHBOARD_NAVIGATION: NavigationItem[] = [
     icon: PackageSearch,
     allowedRoles: ALL_ROLES,
   },
-  {
-    title: "Istorija utroška",
-    href: "/utrosak",
-    description: "Evidencija skidanja sa zaliha",
-    icon: History,
-    allowedRoles: ALL_ROLES,
-  },
-  {
-    title: "Izveštaji",
-    href: "/izvestaji",
-    description: "Analitika i izvoz podataka",
-    icon: FileSpreadsheet,
-    allowedRoles: ALL_ROLES,
-  },
+  // Temporarily hidden until the pages are implemented:
+  // {
+  //   title: "Istorija utroška",
+  //   href: "/utrosak",
+  //   description: "Evidencija skidanja sa zaliha",
+  //   icon: History,
+  //   allowedRoles: ALL_ROLES,
+  // },
+  // {
+  //   title: "Izveštaji",
+  //   href: "/izvestaji",
+  //   description: "Analitika i izvoz podataka",
+  //   icon: FileSpreadsheet,
+  //   allowedRoles: ALL_ROLES,
+  // },
   {
     title: "Evidencija aktivnosti",
     href: "/evidencija",
